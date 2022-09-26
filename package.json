@@ -20,9 +20,11 @@
     "@angular/router": "^14.2.0",
     "@fontsource/balsamiq-sans": "^4.5.8",
     "@popperjs/core": "^2.11.6",
+    "@types/jquery": "^3.5.14",
     "bootstrap": "^5.2.1",
     "jquery": "^3.6.1",
     "rxjs": "~7.5.0",
+    "save-dev": "^0.0.1-security",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
