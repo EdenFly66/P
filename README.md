@@ -1,6 +1,6 @@
 # Pudufesor
   bootstrap: '5.2.1',
-  angularcli : '14.2.0',
+  angularcli : '14.2.3',
   npm: '8.19.2',
   node: '18.8.0',
   v8: '10.2.154.13-node.11',
