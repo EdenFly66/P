@@ -1,21 +1,3 @@
 # Pudufesor
-  bootstrap: '5.2.1',
-  angularcli : '14.2.3',
-  npm: '8.19.2',
-  node: '18.8.0',
-  v8: '10.2.154.13-node.11',
-  uv: '1.43.0',
-  zlib: '1.2.11',
-  brotli: '1.0.9',
-  ares: '1.18.1',
-  modules: '108',
-  nghttp2: '1.47.0',
-  napi: '8',
-  llhttp: '6.0.7',
-  openssl: '3.0.5+quic',
-  cldr: '41.0',
-  icu: '71.1',
-  tz: '2022a',
-  unicode: '14.0',
-  ngtcp2: '0.1.0-DEV',
-  nghttp3: '0.1.0-DEV'
+
+  Se requiere Bootstrap 5.2.1, Angular CLI 14.2.3, node.js y la instalación de la fuente "Balsamiq Sans".
