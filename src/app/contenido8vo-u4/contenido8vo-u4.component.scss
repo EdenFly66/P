@@ -1,0 +1,17 @@
+#barra{
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+    height: 40px;
+    display: flex;
+    align-items:center;
+    justify-content: flex-start;
+    padding: 5px;
+    .h3{
+        margin-left: 90vh;
+        color: black;
+        font-family: 'Balsamiq Sans';
+        font-weight: bold;
+        font-size: larger;
+        display: flex;
+    }
+}

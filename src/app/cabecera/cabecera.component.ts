@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import ListaColores from 'src/assets/data/colores.json';
 
 @Component({
   selector: 'app-cabecera',
@@ -11,6 +12,6 @@ export class CabeceraComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  colores: any = ListaColores;
 }
 
