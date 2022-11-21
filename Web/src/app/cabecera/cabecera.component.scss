@@ -1,0 +1,34 @@
+.container-fluid{
+    height:120px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+
+    #icono{
+        align-items: center;
+        justify-content: left;
+        text-decoration: none;
+        align-self: center;
+        display: flex;
+        color: black;
+        font-family: 'Balsamiq Sans';
+        height: 120px;
+        padding: 20px;
+        
+        
+        img{
+            display: flex;
+            height: 70px;
+            width: 90px;
+        }
+           
+    }
+    
+    
+    #login{
+        align-self: center;
+        color: black;
+        margin: 20px;
+    }
+    
+}
