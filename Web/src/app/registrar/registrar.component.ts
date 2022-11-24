@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import ListaColores from 'src/assets/data/colores.json';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FirebaseErrorService } from '../services/firebase-error.service';
 
 @Component({
   selector: 'app-registrar',
@@ -10,48 +13,33 @@ import ListaColores from 'src/assets/data/colores.json';
 export class RegistrarComponent implements OnInit {
 
   
-  registerForm!: FormGroup;
+  registrarUsuario: FormGroup;
+  username:any;
+  email:any;
+  rut:any;
   password1: any;
   password2: any;
   
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder, private afAuth: AngularFireAuth, private router:Router, private firebaseError : FirebaseErrorService) {
+    this.registrarUsuario = this.fb.group({
+      
+      email: [
+        '',
+        [Validators.required, Validators.email],
+      ],
+      password1: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(15),
+        ],
+      ],
+      password2: [''],
+    })
+  }
   
     ngOnInit(): void {
-      this.registerForm = this.initForm();
-    }
-  
-    onSubmit(): void {
-      console.log('Form ->');
-      console.log(this.registerForm.value);
-    }
-  
-    initForm(): FormGroup {
-      return this.fb.group({
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(18),
-          ],
-        ],
-        email: [
-          '',
-          [Validators.required, Validators.email],
-        ],
-        password1: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(15),
-          ],
-        ],
-        password2: [''],
-      });
-    }
-    formValid() {
-      return !this.registerForm.valid || this.password1 != this.password2;
     }
   
     equalPass(): boolean {
@@ -60,6 +48,22 @@ export class RegistrarComponent implements OnInit {
       } else {
         return false;
       }
+    }
+
+    registrar(){
+      const email = this.registrarUsuario.value.email;
+      const password1 = this.registrarUsuario.value.password1;
+
+      this.afAuth.createUserWithEmailAndPassword(email,password1).then(()=> {
+        this.router.navigate(['/verificado']);
+        this.verificarCorreo();
+      }).catch((error)=>{
+        alert(this.firebaseError.firebaseError(error.code))
+      });
+    }
+    
+    verificarCorreo(){
+      this.afAuth.currentUser.then(user=> user?.sendEmailVerification())
     }
     colores: any = ListaColores;
   }

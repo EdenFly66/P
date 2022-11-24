@@ -5,143 +5,113 @@
 <div class="row">
 
 
-<form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
-    <div class="mb-4">
+  <div class="row">
+
+
+    <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+        
+        <div class="mb-4">
+          <label for="email" class="form-label">Correo electrónico:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            formControlName="email"
+          />
+        </div>
       
-      <label for="username" class="form-label">Nombre de usuario:</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        name="username"
-        formControlName="username"
-      />
-    </div>
+        
+        <div
+          *ngIf="(registrarUsuario.get('email')?.touched && registrarUsuario.get('email')?.errors?.['required'])"
+          class="alert alert-danger"
+        >
+          Este campo es obligatorio.
+        </div>
+      
+        
+        <div
+          *ngIf="registrarUsuario.get('email')?.touched && registrarUsuario.get('email')?.errors?.['maxlength']"
+          class="alert alert-danger"
+        >
+          Correo debe ser como máximo
+          {{ registrarUsuario.get('email')?.errors?.['maxlength']?.requiredLength }}
+          caracteres.
+        </div>
+      
+        
+        <div
+          *ngIf="(registrarUsuario.get('email')?.touched && registrarUsuario.get('email')?.errors?.['email'])"
+          class="alert alert-danger"
+        >
+          Debe ser un correo válido.
+        </div>
+      
+        
+        <div class="mb-4">
+          <label for="password" class="form-label">Contraseña:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password1"
+            [(ngModel)]="password1"
+          />
+        </div>
+      
+        
+        <div
+          *ngIf="(registrarUsuario.get('password1')?.touched && registrarUsuario.get('password1')?.errors?.['required'])"
+          class="alert alert-danger"
+        >
+          Este campo es obligatorio.
+        </div>
+      
+        
+        <div
+          *ngIf="registrarUsuario.get('password1')?.touched && registrarUsuario.get('password1')?.errors?.['minlength']"
+          class="alert alert-danger"
+        >
+          Contraseña debe ser de al menos
+          {{ registrarUsuario.get('password1')?.errors?.['minlength']?.requiredLength }}
+          caracteres.
+        </div>
+      
+        
+        <div
+          *ngIf="registrarUsuario.get('password1')?.touched && registrarUsuario.get('password1')?.errors?.['maxlength']"
+          class="alert alert-danger"
+        >
+          Contraseña debe ser como máximo
+          {{ registrarUsuario.get('password1')?.errors?.['maxlength']?.requiredLength }}
+          caracteres.
+        </div>
+      
+        
+        <div class="mb-4">
+          <label for="repassword" class="form-label">Repita contraseña:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="repassword"
+            formControlName="password2"
+            [(ngModel)]="password2"
+          />
+        </div>
+      
+        <div *ngIf="!equalPass()" class="alert alert-danger">
+          Las contraseñas no coinciden.
+        </div>
+      
+        <a href="">¿Ya tienes cuenta?, Ingresa aquí</a>
   
-    
-    <div
-      *ngIf="(registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['required'])"
-      class="alert alert-danger"
-    >
-      Este campo es obligatorio.
-    </div>
+        <br>
+        <br>
+        
+        <button type="submit" class="btn btn-dark" [disabled]="registrarUsuario.get('email')?.errors?.['required'] ||registrarUsuario.get('email')?.errors?.['maxlenght'] || registrarUsuario.get('email')?.errors?.['email'] || registrarUsuario.get('password1')?.errors?.['required'] || registrarUsuario.get('password1')?.errors?.['minlength'] || registrarUsuario.get('password1')?.errors?.['maxlength'] || equalPass()==false">
+          Registrarse
+        </button>
   
-    
-    <div
-      *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['minlength']"
-      class="alert alert-danger"
-    >
-      Nombre de usuario debe ser de al menos
-      {{ registerForm.get('username')?.errors?.['minlength']?.requiredLength }}
-      caracteres.
+        
+      </form>
     </div>
-  
-    
-    <div
-      *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors?.['maxlength']"
-      class="alert alert-danger"
-    >
-      Nombre de usuario debe ser como máximo
-      {{ registerForm.get('username')?.errors?.['maxlength']?.requiredLength }}
-      caracteres.
-    </div>
-  
-    
-    <div class="mb-4">
-      <label for="email" class="form-label">Correo electrónico:</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        name="email"
-        formControlName="email"
-      />
-    </div>
-  
-    
-    <div
-      *ngIf="(registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required'])"
-      class="alert alert-danger"
-    >
-      Este campo es obligatorio.
-    </div>
-  
-    
-    <div
-      *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['maxlength']"
-      class="alert alert-danger"
-    >
-      Correo debe ser como máximo
-      {{ registerForm.get('email')?.errors?.['maxlength']?.requiredLength }}
-      caracteres.
-    </div>
-  
-    
-    <div
-      *ngIf="(registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email'])"
-      class="alert alert-danger"
-    >
-      Debe ser un correo válido.
-    </div>
-  
-    
-    <div class="mb-4">
-      <label for="password" class="form-label">Contraseña:</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        formControlName="password1"
-        [(ngModel)]="password1"
-      />
-    </div>
-  
-    
-    <div
-      *ngIf="(registerForm.get('password1')?.touched && registerForm.get('password1')?.errors?.['required'])"
-      class="alert alert-danger"
-    >
-      Este campo es obligatorio.
-    </div>
-  
-    
-    <div
-      *ngIf="registerForm.get('password1')?.touched && registerForm.get('password1')?.errors?.['minlength']"
-      class="alert alert-danger"
-    >
-      Contraseña debe ser de al menos
-      {{ registerForm.get('password1')?.errors?.['minlength']?.requiredLength }}
-      caracteres.
-    </div>
-  
-    
-    <div
-      *ngIf="registerForm.get('password1')?.touched && registerForm.get('password1')?.errors?.['maxlength']"
-      class="alert alert-danger"
-    >
-      Contraseña debe ser como máximo
-      {{ registerForm.get('password1')?.errors?.['maxlength']?.requiredLength }}
-      caracteres.
-    </div>
-  
-    
-    <div class="mb-4">
-      <label for="repassword" class="form-label">Repita contraseña:</label>
-      <input
-        type="password"
-        class="form-control"
-        id="repassword"
-        formControlName="password2"
-        [(ngModel)]="password2"
-      />
-    </div>
-  
-    <div *ngIf="!equalPass()" class="alert alert-danger">
-      Las contraseñas no coinciden.
-    </div>
-  
-    <button type="submit" class="btn btn-dark" [disabled]="formValid()">
-      Registrarse
-    </button>
-  </form>
-</div>

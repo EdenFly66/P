@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import ListaColores from 'src/assets/data/colores.json';
 
+
 @Component({
   selector: 'app-cabecera',
   templateUrl: './cabecera.component.html',

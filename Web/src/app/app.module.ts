@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CabeceraComponent } from './cabecera/cabecera.component';
@@ -25,10 +24,20 @@ import { Puduebas8voU2Component } from './puduebas8vo-u2/puduebas8vo-u2.componen
 import { Puduebas8voU3Component } from './puduebas8vo-u3/puduebas8vo-u3.component';
 import { Puduebas8voU4Component } from './puduebas8vo-u4/puduebas8vo-u4.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { VerificadoComponent } from './verificado/verificado.component';
+import { RecuperarComponent } from './recuperar/recuperar.component';
+import { ContrasenaRecuperadaComponent } from './contrasena-recuperada/contrasena-recuperada.component';
+
 
 const appRoutes: Routes = [
-  {path:'',component:FuncionalidadesComponent},
-  {path:'ingresar',component:IngresarComponent},
+  {path:'funcionalidades',component:FuncionalidadesComponent},
+  {path:'',component:IngresarComponent},
   {path:'registrar',component:RegistrarComponent},
   {path:'contenidos8vo',component:Contenidos8voComponent},
   {path:'ejercitar8vo',component:Ejercitar8voComponent},
@@ -44,7 +53,10 @@ const appRoutes: Routes = [
   {path:'puduebas8voU1',component:Puduebas8voU1Component},
   {path:'puduebas8voU2',component:Puduebas8voU2Component},
   {path:'puduebas8voU3',component:Puduebas8voU3Component},
-  {path:'puduebas8voU4',component:Puduebas8voU4Component}
+  {path:'puduebas8voU4',component:Puduebas8voU4Component},
+  {path:'recuperar',component:RecuperarComponent},
+  {path:'verificado',component:VerificadoComponent},
+  {path:'contrasena-recuperada',component:ContrasenaRecuperadaComponent},
 ];
 
 @NgModule({
@@ -70,14 +82,24 @@ const appRoutes: Routes = [
     Puduebas8voU2Component,
     Puduebas8voU3Component,
     Puduebas8voU4Component,
+    VerificadoComponent,
+    RecuperarComponent,
+    ContrasenaRecuperadaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAnalytics(() => getAnalytics()),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [
+    ScreenTrackingService,UserTrackingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,3 @@
-import ListaColores from 'src/assets/data/colores.json';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -6,19 +5,14 @@ import { Router } from '@angular/router';
 import { FirebaseErrorService } from '../services/firebase-error.service';
 
 @Component({
-  selector: 'app-ingresar',
-  templateUrl: './ingresar.component.html',
-  styleUrls: ['./ingresar.component.scss']
+  selector: 'app-recuperar',
+  templateUrl: './recuperar.component.html',
+  styleUrls: ['./recuperar.component.scss']
 })
-export class IngresarComponent implements OnInit {
-
-  
-  login: FormGroup;
-  email:any;
-  password1:any;
-  
+export class RecuperarComponent implements OnInit {
+  recuperar:FormGroup;
   constructor(private readonly fb: FormBuilder, private afAuth: AngularFireAuth, private router:Router, private firebaseError: FirebaseErrorService) {
-    this.login = this.fb.group({
+    this.recuperar = this.fb.group({
       email: [
         '',
         [Validators.required, Validators.email],
@@ -35,17 +29,15 @@ export class IngresarComponent implements OnInit {
     }
   ngOnInit(): void {
   }
-
-  logueo():void{
-    const email = this.login.value.email;
-    const password1 = this.login.value.password1;
-
-    this.afAuth.signInWithEmailAndPassword(email,password1).then(()=>{
-      this.router.navigate(['funcionalidades']);
-    }).catch((error)=>
-      alert(this.firebaseError.firebaseError(error.code))
-    )
-  }
-    colores: any = ListaColores;
-  }
   
+  recuperacion(){
+    const email = this.recuperar.value.email;
+
+    this.afAuth.sendPasswordResetEmail(email).then(()=>{
+      this.router.navigate(['/contrasena-recuperada']);
+    }).catch((error)=>{
+      this.firebaseError.firebaseError(error.code);
+    })
+  }
+
+}
