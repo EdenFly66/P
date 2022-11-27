@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import ListaColores from 'src/assets/data/colores.json';
-
+import ListaUnidades from 'src/assets/data/unidades.json';
 @Component({
   selector: 'app-contenido8vo-u2',
   templateUrl: './contenido8vo-u2.component.html',
@@ -13,4 +13,5 @@ export class Contenido8voU2Component implements OnInit {
   ngOnInit(): void {
   }
   colores: any = ListaColores;
+  unidades:any = ListaUnidades;
 }
