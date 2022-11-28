@@ -33,6 +33,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { VerificadoComponent } from './verificado/verificado.component';
 import { RecuperarComponent } from './recuperar/recuperar.component';
 import { ContrasenaRecuperadaComponent } from './contrasena-recuperada/contrasena-recuperada.component';
+import { AgregarPreguntaComponent } from './agregar-pregunta/agregar-pregunta.component';
+import { PreguntaService } from './services/pregunta.service';
 
 
 const appRoutes: Routes = [
@@ -57,6 +59,7 @@ const appRoutes: Routes = [
   {path:'recuperar',component:RecuperarComponent},
   {path:'verificado',component:VerificadoComponent},
   {path:'contrasena-recuperada',component:ContrasenaRecuperadaComponent},
+  {path:'agregar-pregunta',component:AgregarPreguntaComponent}
 ];
 
 @NgModule({
@@ -85,6 +88,7 @@ const appRoutes: Routes = [
     VerificadoComponent,
     RecuperarComponent,
     ContrasenaRecuperadaComponent,
+    AgregarPreguntaComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,7 @@ const appRoutes: Routes = [
     provideFirestore(() => getFirestore())
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,UserTrackingService,PreguntaService
   ],
   bootstrap: [AppComponent]
 })

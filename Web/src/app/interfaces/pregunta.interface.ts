@@ -1,5 +1,5 @@
 export default interface Pregunta{
     id?: string;
-    url:string;
+    pregunta:string;
     respuesta:string;
 }

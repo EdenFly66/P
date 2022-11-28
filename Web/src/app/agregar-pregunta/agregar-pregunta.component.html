@@ -1,0 +1,36 @@
+<div class="row">
+<form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+      
+    
+      
+    <div class="mb-4">
+      <label for="pregunta" class="form-label">Pregunta:</label>
+      <input
+        type="pregunta"
+        class="form-control"
+        id="pregunta"
+        name="pregunta"
+        formControlName="pregunta"
+      />
+    </div>
+  
+    
+    <div class="mb-4">
+      <label for="respuesta" class="form-label">Respuesta:</label>
+      <input
+        type="respuesta"
+        class="form-control"
+        id="respuesta"
+        formControlName="respuesta"
+        [(ngModel)]="respuesta"
+      />
+    </div>
+      
+    <button type="submit" class="btn btn-dark">
+      Agregar
+    </button>
+
+
+
+  </form>
+</div>
