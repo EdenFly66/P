@@ -1,0 +1,46 @@
+<div class="row">
+
+
+    <form (ngSubmit)="agregarPregunta()" [formGroup]="formulario">
+        
+      
+        
+        <div class="mb-4">
+          <label for="pregunta" class="form-label">Pregunta</label>
+          <input
+            type="pregunta"
+            class="form-control"
+            id="pregunta"
+            name="pregunta"
+            formControlName="pregunta"
+          />
+        </div>
+      
+        <div class="mb-4">
+          <label for="respuesta" class="form-label">Respuesta</label>
+          <input
+            type="respuesta"
+            class="form-control"
+            id="respuesta"
+            formControlName="respuesta"
+            [(ngModel)]="respuesta"
+          />
+        </div>
+
+        <div class="mb-4">
+            <label for="unidad" class="form-label">Unidad</label>
+            <input
+              type="unidad"
+              class="form-control"
+              id="unidad"
+              name="unidad"
+              formControlName="unidad"
+            />
+          </div>
+      
+        <button type="submit" class="btn btn-dark" >
+          Agregar
+        </button>
+  
+      </form>
+    </div>

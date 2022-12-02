@@ -33,6 +33,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { VerificadoComponent } from './verificado/verificado.component';
 import { RecuperarComponent } from './recuperar/recuperar.component';
 import { ContrasenaRecuperadaComponent } from './contrasena-recuperada/contrasena-recuperada.component';
+import { AgregarPreguntaComponent } from './agregar-pregunta/agregar-pregunta.component';
 
 
 const appRoutes: Routes = [
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
     VerificadoComponent,
     RecuperarComponent,
     ContrasenaRecuperadaComponent,
+    AgregarPreguntaComponent,
   ],
   imports: [
     BrowserModule,
