@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import ListaColores from 'src/assets/data/colores.json';
 
 @Component({
@@ -8,9 +9,13 @@ import ListaColores from 'src/assets/data/colores.json';
 })
 export class FuncionalidadesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  toAdd(){
+    this.router.navigate(['/agregar-pregunta']);
   }
   colores: any = ListaColores;
 }

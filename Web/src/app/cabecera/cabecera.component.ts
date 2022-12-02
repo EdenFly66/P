@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+import { signOut } from 'firebase/auth';
 import ListaColores from 'src/assets/data/colores.json';
 
 
@@ -9,9 +12,15 @@ import ListaColores from 'src/assets/data/colores.json';
 })
 export class CabeceraComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:Auth, private router:Router) { }
 
   ngOnInit(): void {
+  }
+  
+  logOut(){
+    signOut(this.auth).then(()=>{
+      this.router.navigate(['/']);
+    });
   }
   colores: any = ListaColores;
 }
