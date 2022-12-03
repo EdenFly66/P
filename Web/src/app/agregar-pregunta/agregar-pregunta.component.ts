@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore } from '@angular/fire/firestore';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup,FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { addDoc, collection } from 'firebase/firestore';
-import { FirebaseErrorService } from '../services/firebase-error.service';
+import { PreguntaService } from '../services/pregunta.service';
 @Component({
   selector: 'app-agregar-pregunta',
   templateUrl: './agregar-pregunta.component.html',
@@ -16,7 +13,7 @@ export class AgregarPreguntaComponent {
   respuesta:any;
   unidad:any;
   
-  constructor(private readonly fb: FormBuilder, private afAuth: AngularFireAuth, private router:Router, private firebaseError: FirebaseErrorService, private firestore:Firestore) {
+  constructor(private preguntaService:PreguntaService,private router:Router) {
     this.formulario = new FormGroup({
       pregunta: new FormControl(),
       respuesta: new FormControl(),
@@ -24,9 +21,8 @@ export class AgregarPreguntaComponent {
     })
     }
 
-  agregarPregunta(){
-    const preguntaRef = collection(this.firestore,'PREGUNTAS');
-    addDoc(preguntaRef,this.formulario);
-    this.router.navigate(['/funcionalidades']);
+  async agregarPregunta(){
+    await this.preguntaService.addPregunta(this.formulario.value)
+    alert('Pum')
   }
 }
