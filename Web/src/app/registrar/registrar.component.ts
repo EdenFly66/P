@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseErrorService } from '../services/firebase-error.service';
+import { PreguntaService } from '../services/pregunta.service';
 
 @Component({
   selector: 'app-registrar',
@@ -12,7 +13,7 @@ import { FirebaseErrorService } from '../services/firebase-error.service';
 })
 export class RegistrarComponent implements OnInit {
 
-  
+  authState: any = null;
   registrarUsuario: FormGroup;
   username:any;
   email:any;
@@ -20,7 +21,7 @@ export class RegistrarComponent implements OnInit {
   password1: any;
   password2: any;
   
-  constructor(private readonly fb: FormBuilder, private afAuth: AngularFireAuth, private router:Router, private firebaseError : FirebaseErrorService) {
+  constructor(private readonly fb: FormBuilder, private afAuth: AngularFireAuth, private router:Router, private firebaseError : FirebaseErrorService, private preguntaService: PreguntaService) {
     this.registrarUsuario = this.fb.group({
       
       email: [
@@ -53,14 +54,19 @@ export class RegistrarComponent implements OnInit {
     registrar(){
       const email = this.registrarUsuario.value.email;
       const password1 = this.registrarUsuario.value.password1;
-
+      const rol = 'usuario'
       this.afAuth.createUserWithEmailAndPassword(email,password1).then(()=> {
         this.router.navigate(['/verificado']);
         this.verificarCorreo();
+        this.preguntaService.guardarUsuario(email,rol);
       }).catch((error)=>{
         alert(this.firebaseError.firebaseError(error.code))
       });
     }
+
+    get isAuthenticated(): boolean {
+      return this.authState !== null;
+  }
     
     verificarCorreo(){
       this.afAuth.currentUser.then(user=> user?.sendEmailVerification())

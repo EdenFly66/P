@@ -23,6 +23,6 @@ export class AgregarPreguntaComponent {
 
   async agregarPregunta(){
     await this.preguntaService.addPregunta(this.formulario.value)
-    alert('Pum')
+    alert('Pregunta agregada con éxito')
   }
 }
